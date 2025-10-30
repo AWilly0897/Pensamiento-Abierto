@@ -25,7 +25,7 @@ document.querySelectorAll('nav a').forEach(link => {
 });
 // Lista de artículos con fecha y hora de publicación
   const articulos = [
-    { nombre: "articulo1.html", titulo: "Artículo 1", fecha: "2025-10-29T21:00:00" },
+    { nombre: "articulo1.html", titulo: "Artículo 1", fecha: "2025-10-29T21:30:00" },
     { nombre: "articulo2.html", titulo: "Artículo 2", fecha: "2025-11-01T21:00:00" },
     { nombre: "articulo3.html", titulo: "Artículo 3", fecha: "2025-11-05T21:00:00" },
     { nombre: "articulo4.html", titulo: "Artículo 4", fecha: "2025-11-08T21:00:00" },
