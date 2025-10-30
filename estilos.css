@@ -147,3 +147,22 @@ footer .relaciones {
     font-size: 1.2rem;
   }
 }
+.contenedor-articulos {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #eef2f5;
+  border-left: 4px solid #003366;
+  border-radius: 6px;
+}
+
+.contenedor-articulos h2 {
+  font-size: 1.4rem;
+  color: #003366;
+  margin-bottom: 1rem;
+}
+
+.proximo-articulo {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 1rem;
+}
