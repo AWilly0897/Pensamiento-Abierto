@@ -29,6 +29,10 @@ document.querySelectorAll('nav a').forEach(link => {
     { nombre: "articulo2.html", titulo: "Artículo 2", fecha: "2025-11-01T21:00:00" },
     { nombre: "articulo3.html", titulo: "Artículo 3", fecha: "2025-11-05T21:00:00" },
     { nombre: "articulo4.html", titulo: "Artículo 4", fecha: "2025-11-08T21:00:00" },
+    { nombre: "articulo5.html", titulo: "Artículo 5", fecha: "2025-11-12T21:00:00" },
+    { nombre: "articulo6.html", titulo: "Artículo 6", fecha: "2025-11-16T21:00:00" },
+    { nombre: "articulo7.html", titulo: "Artículo 7", fecha: "2025-11-20T21:00:00" },
+    { nombre: "articulo8.html", titulo: "Artículo 8", fecha: "2025-11-24T21:00:00" },
     // Agregá más artículos según tu cronograma editorial
   ];
 
