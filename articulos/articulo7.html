@@ -214,14 +214,62 @@
         </blockquote>
     </main>
 
-    <footer role="contentinfo" aria-label="Información legal y de edición">
-        <p>Primera edición de pensamiento abierto · © 2025 Ernesto I. Lora. Todos los derechos reservados.</p>
-        <div class="relaciones" aria-label="Información técnica del sitio">
-            <p>Publicado en <strong>GitHub Pages</strong> · Desplegado con <strong>Vercel</strong></p>
-            <p>Interacciones gestionadas por <strong>Copilot</strong> · Base de datos independiente</p>
-            <p>Escalabilidad futura con <strong>Azure</strong></p>
-        </div>
-    </footer>
+    <section class="formulario-testimonial" aria-labelledby="titulo-formulario">
+            <h2 id="titulo-formulario">Tu pensamiento sobre este artículo</h2>
+            <p class="intro-formulario">Este espacio está abierto para quienes deseen compartir una reflexión, una
+                crítica o
+                una memoria. Cada comentario será tratado como parte de lo que
+                se trata transmitir, no como dato.</p>
+
+            <form id="formulario-comentario">
+                <label for="nombre">Nombre (opcional):</label>
+                <input type="text" id="nombre" name="nombre" />
+
+                <label for="comentario">Comentario:</label>
+                <textarea id="comentario" name="comentario" required></textarea>
+
+                <button type="submit">Generar comentario</button>
+            </form>
+            <p class="nota-etica">Este formulario no rastrea, no simula. Cada envío será validado manualmente y podrá
+                ser
+                retirado si el autor lo solicita. La palabra sera tratada como tal.</p>
+
+            <script>
+                document.getElementById("formulario-comentario").addEventListener("submit", function (e) {
+                    e.preventDefault();
+                    const nombre = document.getElementById("nombre").value || "Anónimo";
+                    const comentario = document.getElementById("comentario").value;
+                    const fecha = new Date().toISOString();
+                    const articulo = document.title || "articulo-sin-titulo";
+
+                    const contenido = `---
+            fecha: ${fecha}
+            nombre: ${nombre}
+            articulo: ${articulo}
+            comentario: ${comentario}
+            ---`;
+
+                    navigator.clipboard.writeText(contenido).then(() => {
+                        alert("Comentario generado y copiado. Pegalo en comentarios/pendientes.txt");
+                        document.getElementById("formulario-comentario").reset(); // Limpia los campos
+                    });
+                });
+            </script>
+
+
+            <footer role="contentinfo" aria-label="Información legal y de edición">
+                <p>Primera edición de pensamiento abierto · © 2025 Ernesto I. Lora. Todos los derechos reservados.</p>
+                <div class="relaciones" aria-label="Información técnica del sitio">
+                    <p>Publicado en <strong>GitHub</strong> https://github.com/AWilly0897/Pensamiento-Abierto ·
+                        Desplegado
+                        con <strong>Vercel</strong>Pensamiento-Abierto.vercel.app</p>
+                    <p>Interacciones gestionadas con <strong>Copilot</strong> · Base de datos independiente
+                        <strong>Gestionada por el autor</strong>
+                    </p>
+                    <p>Escalabilidad futura con <strong>Azure</strong></p>
+                </div>
+            </footer>
+
 </body>
 
 </html>

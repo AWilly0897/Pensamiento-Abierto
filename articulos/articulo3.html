@@ -58,7 +58,7 @@
                 ninguno.
                 Y aun así, los diputados cambiaron de idea. Lo que no era justo, pasó a ser justo. Ellos están para
                 defender a los trabajadores,
-                quienes fueron los votaron en su favor. Pero no: ponderan el vil dinero que corrompe y prostituye sin dejar de soslayar
+                quienes fueron los que votaron en su favor. Pero no: ponderan el vil dinero que corrompe y prostituye sin dejar de soslayar
                 su cargo político.
                 Igual que los senadores, que también estiran la mano. Pero no para agarrar la lapicera y corregir las
                 leyes que se van a promulgar o tachar,
@@ -94,62 +94,63 @@
             <span class="firma">— Ernesto I. Lora</span>
         </blockquote>
     </main>
-    <section class="formulario-testimonial" aria-labelledby="titulo-formulario">
-            <h2 id="titulo-formulario">Tu pensamiento sobre este artículo</h2>
-            <p class="intro-formulario">Este espacio está abierto para quienes deseen compartir una reflexión, una
-                crítica o
-                una memoria. Cada comentario será tratado como parte de lo que
-                se trata transmitir, no como dato.</p>
+    <!-- Comentarios publicados -->
+  <div id="bloque-publicados"></div>
 
-            <form id="formulario-comentario">
-                <label for="nombre">Nombre (opcional):</label>
-                <input type="text" id="nombre" name="nombre" />
+  <!-- Formulario de comentarios -->
+  <div id="bloque-formulario"></div>
 
-                <label for="comentario">Comentario:</label>
-                <textarea id="comentario" name="comentario" required></textarea>
+  <!-- Footer -->
+  <div id="bloque-footer"></div>
 
-                <button type="submit">Generar comentario</button>
-            </form>
-            <p class="nota-etica">Este formulario no rastrea, no simula. Cada envío será validado manualmente y podrá
-                ser
-                retirado si el autor lo solicita. La palabra sera tratada como tal.</p>
+  <!-- Scripts -->
+  <script src="/js/comentarios-admin.js"></script>
+  <script>
+    fetch("/componentes/formulario-comentario.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("bloque-formulario").innerHTML = html;
 
-            <script>
-                document.getElementById("formulario-comentario").addEventListener("submit", function (e) {
-                    e.preventDefault();
-                    const nombre = document.getElementById("nombre").value || "Anónimo";
-                    const comentario = document.getElementById("comentario").value;
-                    const fecha = new Date().toISOString();
-                    const articulo = document.title || "articulo-sin-titulo";
+        // Activar el formulario una vez cargado
+        const form = document.getElementById("formulario-comentario");
+        if (form) {
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const nombre = document.getElementById("nombre").value.trim() || "Anónimo";
+            const comentario = document.getElementById("comentario").value.trim();
+            const fecha = new Date().toISOString();
+            const articulo = document.title || "articulo-sin-titulo";
 
-                    const contenido = `---
-            fecha: ${fecha}
-            nombre: ${nombre}
-            articulo: ${articulo}
-            comentario: ${comentario}
-            ---`;
+            const nuevoComentario = {
+              fecha,
+              nombre,
+              articulo,
+              comentario,
+              publicado: false
+            };
 
-                    navigator.clipboard.writeText(contenido).then(() => {
-                        alert("Comentario generado y copiado. Pegalo en comentarios/pendientes.txt");
-                        document.getElementById("formulario-comentario").reset(); // Limpia los campos
-                    });
-                });
-            </script>
+            const comentarios = JSON.parse(localStorage.getItem("comentariosPendientes")) || [];
+            comentarios.push(nuevoComentario);
+            localStorage.setItem("comentariosPendientes", JSON.stringify(comentarios));
 
+            alert("Comentario enviado. Será revisado por el administrador.");
+            e.target.reset();
+          });
+        }
+      });
 
-            <footer role="contentinfo" aria-label="Información legal y de edición">
-                <p>Primera edición de pensamiento abierto · © 2025 Ernesto I. Lora. Todos los derechos reservados.</p>
-                <div class="relaciones" aria-label="Información técnica del sitio">
-                    <p>Publicado en <strong>GitHub</strong> https://github.com/AWilly0897/Pensamiento-Abierto ·
-                        Desplegado
-                        con <strong>Vercel</strong>Pensamiento-Abierto.vercel.app</p>
-                    <p>Interacciones gestionadas con <strong>Copilot</strong> · Base de datos independiente
-                        <strong>Gestionada por el autor</strong>
-                    </p>
-                    <p>Escalabilidad futura con <strong>Azure</strong></p>
-                </div>
-            </footer>
+    fetch("/componentes/comentarios-publicados.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("bloque-publicados").innerHTML = html;
+      });
 
+    fetch("/componentes/footer.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("bloque-footer").innerHTML = html;
+      });
+  </script>
 </body>
 
 </html>

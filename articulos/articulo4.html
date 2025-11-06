@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>El Presidente Imaginario</title>
     <link rel="stylesheet" href="estilo.css" />
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="Favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
@@ -93,14 +93,63 @@
 
     </main>
 
-    <footer role="contentinfo" aria-label="Información legal y de edición">
-        <p>Primera edición de pensamiento abierto · © 2025 Ernesto I. Lora. Todos los derechos reservados.</p>
-        <div class="relaciones" aria-label="Información técnica del sitio">
-            <p>Publicado en <strong>GitHub Pages</strong> · Desplegado con <strong>Vercel</strong></p>
-            <p>Interacciones gestionadas por <strong>Copilot</strong> · Base de datos independiente</p>
-            <p>Escalabilidad futura con <strong>Azure</strong></p>
-        </div>
-    </footer>
+    <!-- Comentarios publicados -->
+  <div id="bloque-publicados"></div>
+
+  <!-- Formulario de comentarios -->
+  <div id="bloque-formulario"></div>
+
+  <!-- Footer -->
+  <div id="bloque-footer"></div>
+
+  <!-- Scripts -->
+  <script src="/js/comentarios-admin.js"></script>
+  <script>
+    fetch("/componentes/formulario-comentario.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("bloque-formulario").innerHTML = html;
+
+        // Activar el formulario una vez cargado
+        const form = document.getElementById("formulario-comentario");
+        if (form) {
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const nombre = document.getElementById("nombre").value.trim() || "Anónimo";
+            const comentario = document.getElementById("comentario").value.trim();
+            const fecha = new Date().toISOString();
+            const articulo = document.title || "articulo-sin-titulo";
+
+            const nuevoComentario = {
+              fecha,
+              nombre,
+              articulo,
+              comentario,
+              publicado: false
+            };
+
+            const comentarios = JSON.parse(localStorage.getItem("comentariosPendientes")) || [];
+            comentarios.push(nuevoComentario);
+            localStorage.setItem("comentariosPendientes", JSON.stringify(comentarios));
+
+            alert("Comentario enviado. Será revisado por el administrador.");
+            e.target.reset();
+          });
+        }
+      });
+
+    fetch("/componentes/comentarios-publicados.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("bloque-publicados").innerHTML = html;
+      });
+
+    fetch("/componentes/footer.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("bloque-footer").innerHTML = html;
+      });
+  </script>
 </body>
 
 </html>
