@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administrador de comentarios</title>
+  <link rel="stylesheet" href="/css/estilo.css" />
+</head>
+<body>
+  <section id="admin-login">
+    <h2>Acceso administrador</h2>
+    <input type="password" id="clave-admin" placeholder="Contraseña" />
+    <button onclick="verificarAcceso()">Ingresar</button>
+  </section>
+
+  <section id="admin-comentarios" style="display:none;">
+    <h2>Administrador de comentarios</h2>
+    <ul id="lista-comentarios"></ul>
+  </section>
+
+  <script src="/js/comentarios-admin.js"></script>
+</body>
+</html>

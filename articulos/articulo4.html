@@ -140,10 +140,11 @@
             });
 
         fetch("/componentes/comentarios-publicados.html")
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById("bloque-publicados").innerHTML = html;
-            });
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById("bloque-publicados").innerHTML = html;
+                    mostrarComentariosPublicados(); // ← Esta línea es clave    
+                });
 
         fetch("/componentes/footer.html")
             .then(res => res.text())
