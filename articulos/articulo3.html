@@ -5,9 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>No olviden la Argentina es nuestra Argentina...</title>
-    <link rel="stylesheet" href="estilo.css" />
-    <link rel="stylesheet" href="../formulario.css">
-    <link rel="icon" href="Favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="/css/formulario.css">
+    <link rel="icon" href="/Favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -58,11 +58,13 @@
                 ninguno.
                 Y aun así, los diputados cambiaron de idea. Lo que no era justo, pasó a ser justo. Ellos están para
                 defender a los trabajadores,
-                quienes fueron los que votaron en su favor. Pero no: ponderan el vil dinero que corrompe y prostituye sin dejar de soslayar
+                quienes fueron los que votaron en su favor. Pero no: ponderan el vil dinero que corrompe y prostituye
+                sin dejar de soslayar
                 su cargo político.
                 Igual que los senadores, que también estiran la mano. Pero no para agarrar la lapicera y corregir las
                 leyes que se van a promulgar o tachar,
-                como si jugaran a los dados, donde primero tachan el uno antes que la doble. Ya que es su careta, es tener a
+                como si jugaran a los dados, donde primero tachan el uno antes que la doble. Ya que es su careta, es
+                tener a
                 mano la careta del “sí” y la careta del “no”.
                 Lo que crean es no corresponder al pueblo que les ha dado el voto para que recurran a las leyes que
                 tienden a favorecer el voto popular.
@@ -95,62 +97,62 @@
         </blockquote>
     </main>
     <!-- Comentarios publicados -->
-  <div id="bloque-publicados"></div>
+    <div id="bloque-publicados"></div>
 
-  <!-- Formulario de comentarios -->
-  <div id="bloque-formulario"></div>
+    <!-- Formulario de comentarios -->
+    <div id="bloque-formulario"></div>
 
-  <!-- Footer -->
-  <div id="bloque-footer"></div>
+    <!-- Footer -->
+    <div id="bloque-footer"></div>
 
-  <!-- Scripts -->
-  <script src="/js/comentarios-admin.js"></script>
-  <script>
-    fetch("/componentes/formulario-comentario.html")
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById("bloque-formulario").innerHTML = html;
+    <!-- Scripts -->
+    <script src="/js/comentarios-admin.js"></script>
+    <script>
+        fetch("/componentes/formulario-comentario.html")
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById("bloque-formulario").innerHTML = html;
 
-        // Activar el formulario una vez cargado
-        const form = document.getElementById("formulario-comentario");
-        if (form) {
-          form.addEventListener("submit", function (e) {
-            e.preventDefault();
-            const nombre = document.getElementById("nombre").value.trim() || "Anónimo";
-            const comentario = document.getElementById("comentario").value.trim();
-            const fecha = new Date().toISOString();
-            const articulo = document.title || "articulo-sin-titulo";
+                // Activar el formulario una vez cargado
+                const form = document.getElementById("formulario-comentario");
+                if (form) {
+                    form.addEventListener("submit", function (e) {
+                        e.preventDefault();
+                        const nombre = document.getElementById("nombre").value.trim() || "Anónimo";
+                        const comentario = document.getElementById("comentario").value.trim();
+                        const fecha = new Date().toISOString();
+                        const articulo = document.title || "articulo-sin-titulo";
 
-            const nuevoComentario = {
-              fecha,
-              nombre,
-              articulo,
-              comentario,
-              publicado: false
-            };
+                        const nuevoComentario = {
+                            fecha,
+                            nombre,
+                            articulo,
+                            comentario,
+                            publicado: false
+                        };
 
-            const comentarios = JSON.parse(localStorage.getItem("comentariosPendientes")) || [];
-            comentarios.push(nuevoComentario);
-            localStorage.setItem("comentariosPendientes", JSON.stringify(comentarios));
+                        const comentarios = JSON.parse(localStorage.getItem("comentariosPendientes")) || [];
+                        comentarios.push(nuevoComentario);
+                        localStorage.setItem("comentariosPendientes", JSON.stringify(comentarios));
 
-            alert("Comentario enviado. Será revisado por el administrador.");
-            e.target.reset();
-          });
-        }
-      });
+                        alert("Comentario enviado. Será revisado por el administrador.");
+                        e.target.reset();
+                    });
+                }
+            });
 
-    fetch("/componentes/comentarios-publicados.html")
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById("bloque-publicados").innerHTML = html;
-      });
+        fetch("/componentes/comentarios-publicados.html")
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById("bloque-publicados").innerHTML = html;
+            });
 
-    fetch("/componentes/footer.html")
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById("bloque-footer").innerHTML = html;
-      });
-  </script>
+        fetch("/componentes/footer.html")
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById("bloque-footer").innerHTML = html;
+            });
+    </script>
 </body>
 
 </html>
