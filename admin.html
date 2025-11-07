@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Administrador de comentarios</title>
-  <link rel="stylesheet" href="/css/estilo.css" />
+  <link rel="stylesheet" href="css/estilos.css" />
+  <link rel="stylesheet" href="css/formulario.css" />
 </head>
 <body>
   <section id="admin-login">
@@ -15,9 +16,15 @@
 
   <section id="admin-comentarios" style="display:none;">
     <h2>Administrador de comentarios</h2>
+
+    <!-- Botón para exportar comentarios publicados -->
+    <button onclick="exportarComentarios()">Exportar comentarios publicados</button>
+
+    <!-- Lista de comentarios pendientes -->
     <ul id="lista-comentarios"></ul>
   </section>
 
-  <script src="/js/comentarios-admin.js"></script>
+  <script src="js/comentarios-admin.js"></script>
 </body>
 </html>
+

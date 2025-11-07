@@ -7,6 +7,7 @@
     <title>Privacidad simulada</title>
     <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="/css/formulario.css">
+    <link rel="stylesheet" href="/css/comentarios-publicados.css">
     <link rel="icon" href="/Favicon.ico" type="image/x-icon">
 </head>
 
@@ -67,64 +68,63 @@
         </blockquote>
     </main>
 
-    <!-- Comentarios publicados -->
-    <div id="bloque-publicados"></div>
+   <!-- Comentarios publicados -->
+  <section id="comentarios-publicados" class="comentarios-publicados">
+    <h2>Comentarios publicados</h2>
+    <ul id="lista-publicados"></ul>
+  </section>
 
-    <!-- Formulario de comentarios -->
-    <div id="bloque-formulario"></div>
+  <!-- Formulario de comentarios -->
+  <div id="bloque-formulario"></div>
 
-    <!-- Footer -->
-    <div id="bloque-footer"></div>
+  <!-- Footer -->
+  <div id="bloque-footer"></div>
 
-    <!-- Scripts -->
-    <script src="/js/comentarios-admin.js"></script>
-    <script>
-        fetch("/componentes/formulario-comentario.html")
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById("bloque-formulario").innerHTML = html;
+  <!-- Scripts -->
+  <script src="js/comentarios-admin.js"></script>
+  <script>
+    // Cargar el formulario
+    fetch("../componentes/formulario-comentario.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("bloque-formulario").innerHTML = html;
 
-                // Activar el formulario una vez cargado
-                const form = document.getElementById("formulario-comentario");
-                if (form) {
-                    form.addEventListener("submit", function (e) {
-                        e.preventDefault();
-                        const nombre = document.getElementById("nombre").value.trim() || "Anónimo";
-                        const comentario = document.getElementById("comentario").value.trim();
-                        const fecha = new Date().toISOString();
-                        const articulo = document.title || "articulo-sin-titulo";
+        const form = document.getElementById("formulario-comentario");
+        if (form) {
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const nombre = document.getElementById("nombre").value.trim() || "Anónimo";
+            const comentario = document.getElementById("comentario").value.trim();
+            const fecha = new Date().toISOString();
+            const articulo = document.title || "articulo-sin-titulo";
 
-                        const nuevoComentario = {
-                            fecha,
-                            nombre,
-                            articulo,
-                            comentario,
-                            publicado: false
-                        };
+            const nuevoComentario = {
+              fecha,
+              nombre,
+              articulo,
+              comentario,
+              publicado: false
+            };
 
-                        const comentarios = JSON.parse(localStorage.getItem("comentariosPendientes")) || [];
-                        comentarios.push(nuevoComentario);
-                        localStorage.setItem("comentariosPendientes", JSON.stringify(comentarios));
+            const comentarios = JSON.parse(localStorage.getItem("comentariosPendientes")) || [];
+            comentarios.push(nuevoComentario);
+            localStorage.setItem("comentariosPendientes", JSON.stringify(comentarios));
 
-                        alert("Comentario enviado. Será revisado por el administrador.");
-                        e.target.reset();
-                    });
-                }
-            });
+            alert("Comentario enviado. Será revisado por el administrador.");
+            e.target.reset();
+          });
+        }
+      });
 
-        fetch("/componentes/comentarios-publicados.html")
-                .then(res => res.text())
-                .then(html => {
-                    document.getElementById("bloque-publicados").innerHTML = html;
-                    mostrarComentariosPublicados(); // ← Esta línea es clave    
-                });
+    // Mostrar comentarios publicados desde JSON
+    mostrarComentariosPublicados();
 
-            fetch("/componentes/footer.html")
-                .then(res => res.text())
-                .then(html => {
-                    document.getElementById("bloque-footer").innerHTML = html;
-                });
-        </script>
-    </body>
-    
-    </html>
+    // Cargar el footer
+    fetch("componentes/footer.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("bloque-footer").innerHTML = html;
+      });
+  </script>
+</body>
+</html>
