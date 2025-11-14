@@ -216,63 +216,36 @@
         </blockquote>
     </main>
 
-     <!-- Comentarios publicados -->
-  <section id="comentarios-publicados" class="comentarios-publicados">
-    <h2>Comentarios publicados</h2>
-    <ul id="lista-publicados"></ul>
-  </section>
+    <!-- Incluir formulario -->
+    <div id="bloque-formulario"></div>
 
-  <!-- Formulario de comentarios -->
-  <div id="bloque-formulario"></div>
+    <!-- Comentarios publicados -->
+    <section id="comentarios-publicados" class="comentarios-publicados">
+        <h2>Comentarios publicados</h2>
+        <ul id="lista-publicados"></ul>
+    </section>
 
-  <!-- Footer -->
-  <div id="bloque-footer"></div>
+    <!-- Footer -->
+    <div id="bloque-footer"></div>
 
-  <!-- Scripts -->
-  <script src="js/comentarios-admin.js"></script>
-  <script>
-    // Cargar el formulario
-    fetch("../componentes/formulario-comentario.html")
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById("bloque-formulario").innerHTML = html;
+    <!-- Scripts -->
+    <script src="/js/comentarios.js"></script>
+    <script>
+        // Cargar el formulario y el footer como componentes
+        fetch("../componentes/formulario-comentario.html")
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById("bloque-formulario").innerHTML = html;
+            });
 
-        const form = document.getElementById("formulario-comentario");
-        if (form) {
-          form.addEventListener("submit", function (e) {
-            e.preventDefault();
-            const nombre = document.getElementById("nombre").value.trim() || "Anónimo";
-            const comentario = document.getElementById("comentario").value.trim();
-            const fecha = new Date().toISOString();
-            const articulo = document.title || "articulo-sin-titulo";
+        fetch("../componentes/footer.html")
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById("bloque-footer").innerHTML = html;
+            });
+    </script>
 
-            const nuevoComentario = {
-              fecha,
-              nombre,
-              articulo,
-              comentario,
-              publicado: false
-            };
 
-            const comentarios = JSON.parse(localStorage.getItem("comentariosPendientes")) || [];
-            comentarios.push(nuevoComentario);
-            localStorage.setItem("comentariosPendientes", JSON.stringify(comentarios));
-
-            alert("Comentario enviado. Será revisado por el administrador.");
-            e.target.reset();
-          });
-        }
-      });
-
-    // Mostrar comentarios publicados desde JSON
-    mostrarComentariosPublicados();
-
-    // Cargar el footer
-    fetch("componentes/footer.html")
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById("bloque-footer").innerHTML = html;
-      });
-  </script>
 </body>
+
 </html>
