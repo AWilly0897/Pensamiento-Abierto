@@ -74,12 +74,26 @@
     <h2>Comentarios publicados</h2>
     <ul id="lista-publicados"></ul>
   </section>
-
+  <nav class="navegacion-articulos" role="navigation" aria-label="Navegación entre artículos">
+    <ul>
+      <li>
+        <a href="articulo5.html" aria-label="Ir al artículo anterior: artículo 5">
+          ⟵ Artículo anterior
+        </a>
+      </li>
+      <li>
+        <a href="articulo7.html" aria-label="Ir al artículo siguiente: artículo 7">
+          Artículo siguiente ⟶
+        </a>
+      </li>
+    </ul>
+  </nav>
   <!-- Footer -->
   <div id="bloque-footer"></div>
 
   <!-- Scripts -->
   <script src="/js/comentarios.js"></script>
+
   <script>
     // Cargar el formulario y el footer como componentes
     fetch("../componentes/formulario-comentario.html")

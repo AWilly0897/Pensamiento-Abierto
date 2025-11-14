@@ -72,6 +72,40 @@ blockquote[aria-label] {
   color: #00796b;
 }
 
+/* Bloque de navegación entre artículos */
+.navegacion-articulos {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #eef2f5;   /* Fondo suave para diferenciarlo */
+  border-top: 2px solid #003366; /* Línea superior para separar visualmente */
+  text-align: center;
+}
+
+.navegacion-articulos ul {
+  list-style: none;   /* Quitar viñetas */
+  padding: 0;
+  margin: 0;
+}
+
+.navegacion-articulos li {
+  display: inline-block; /* Enlaces en línea */
+  margin: 0 1rem;
+}
+
+.navegacion-articulos a {
+  color: #003366;          /* Color sobrio y consistente */
+  font-weight: bold;       /* Resaltar enlaces */
+  text-decoration: none;   /* Sin subrayado por defecto */
+}
+
+.navegacion-articulos a:hover,
+.navegacion-articulos a:focus {
+  text-decoration: underline;          /* Subrayado al pasar o enfocar */
+  outline: 2px dashed #005f73;         /* Contorno accesible para teclado */
+  outline-offset: 4px;
+}
+
+
 /* Pie de página */
 footer[role="contentinfo"] {
   margin-top: 60px;
