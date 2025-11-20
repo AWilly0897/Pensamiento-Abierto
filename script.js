@@ -33,6 +33,8 @@ document.querySelectorAll('nav a').forEach(link => {
     { nombre: "articulo6.html", titulo: "Artículo 6", fecha: "2025-11-16T21:00:00" },
     { nombre: "articulo7.html", titulo: "Artículo 7", fecha: "2025-11-20T21:00:00" },
     { nombre: "articulo8.html", titulo: "Artículo 8", fecha: "2025-11-24T21:00:00" },
+    { nombre: "articulo9.html", titulo: "Artículo 9", fecha: "2025-11-29T21:00:00" },
+    { nombre: "articulo10.html", titulo: "Artículo 10", fecha: "2025-12-05T21:00:00" },
     // Agregá más artículos según tu cronograma editorial
   ];
 
